@@ -8,9 +8,18 @@
     display: flex;
     flex-wrap: wrap;
 
+    @media only screen and (max-width: $bp-low) {
+        padding: 1.5rem 0;
+        margin: 1.5rem 0;
+    }
+
     &__item {
         flex: 0 0 50%;
         margin-bottom: .7rem;
+
+        @media only screen and (max-width: $bp-low) {
+            flex: 0 0 100%;
+        }
     }
     
     &__item::before {
@@ -21,14 +30,18 @@
         margin-right: .7rem;
 
         // Older browser
-        // background-image: url(../img/chevron-thin-right.svg);
-        // background-size: cover;
+        background-image: url(../img/chevron-thin-right.svg);
+        background-size: cover;
 
         // Newer browsers
-        background-color: var(--color-primary);
-        -webkit-mask-image: url(../img/chevron-thin-right.svg);
-        -webkit-mask-size: cover;
-        mask-image: url(../img/chevron-thin-right.svg);
-        mask-size: cover;
+        @supports(-webkit-mask-image: url()) or (mask-image: url()) {
+            background-color: var(--color-primary);
+            -webkit-mask-image: url(../img/chevron-thin-right.svg);
+            -webkit-mask-size: cover;
+            mask-image: url(../img/chevron-thin-right.svg);
+            mask-size: cover;
+            background-image: none;
+        }
+        
     }
 }
